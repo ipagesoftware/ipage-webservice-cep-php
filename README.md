@@ -15,3 +15,20 @@ Os valores válidos são: XML, JSON, JavaScript, formato texto PIPED, formato te
 
 A chave de acesso ao Webservice é obrigatória e deve ser passada na URL junto com o CEP, formato de retorno e deve ser compatível com o esperado pelo Webservice. Caso não possua uma chave de acesso, solicite no nosso web site: https://www.ipage.com.br/ipage/wskey/index.php#formulario
 
+Pesquisa por CEP.
+
+Exemplo de pesquisa por CEP com retorno em JSON.
+https://www.ipage.com.br/ws/v1/cep/54315-570/json/2e3da304a5e311e98df5289a8be9ede8/
+
+Exemplo de pesquisa por CEP com retorno em XML.
+https://www.ipage.com.br/ws/v1/cep/04548-005/xml/2e3da304a5e311e98df5289a8be9ede8/
+
+Exemplo de pesquisa por CEP com retorno em Javascript.
+https://www.ipage.com.br/ws/v1/cep/04548-005/javascript/2e3da304a5e311e98df5289a8be9ede8/
+
+Exemplo de pesquisa por CEP com retorno em QUERTY.
+https://www.ipage.com.br/ws/v1/cep/04548-005/querty/2e3da304a5e311e98df5289a8be9ede8/
+
+Exemplo de pesquisa por CEP com retorno em PIPED.
+https://www.ipage.com.br/ws/v1/cep/04548-005/piped/2e3da304a5e311e98df5289a8be9ede8/
+
