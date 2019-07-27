@@ -32,3 +32,6 @@ https://www.ipage.com.br/ws/v1/cep/04548-005/querty/2e3da304a5e311e98df5289a8be9
 Exemplo de pesquisa por CEP com retorno em PIPED.
 https://www.ipage.com.br/ws/v1/cep/04548-005/piped/2e3da304a5e311e98df5289a8be9ede8/
 
+
+Veja no site o exemplo antes de realizar o download: https://www.ipage.com.br/ws/exemplos/cep_php/
+
