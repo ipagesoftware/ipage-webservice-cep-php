@@ -1,5 +1,5 @@
 # ipage-webservice-cep-php
-Busca por CEP em PHP utilizando webservice da Ipage Software
+Busca por CEP em PHP  Jquery utilizando webservice da Empresa Ipage Software
 
 Como funciona um Webservice?
 Webservice é uma solução utilizada na integração de sistemas e na comunicação entre aplicações diferentes. Com esta tecnologia é possível que novas aplicações possam interagir com aquelas que já existem e que sistemas desenvolvidos em plataformas diferentes sejam compatíveis.
