@@ -2,9 +2,9 @@
 * email: diogenesdias@hotmail.com
 * http://www.ipage.com.br
 *
-* Scritp auxiliar da p·gina index.php
+* Scritp auxiliar da p√°gina index.php
 *
-* @author IPAGE - DiÛgenes Dias
+* @author IPAGE - Di√≥genes Dias
 * @copyright 2019
 *
 */
@@ -18,7 +18,7 @@ $(document).ready(function(){
 var index = function(){
     /**
      * index::handleForm()
-     * M…TODO RESPONS¡VEL PELO TRATAMENTO DO CEP
+     * M√âTODO RESPONS√ÅVEL PELO TRATAMENTO DO CEP
      */
     var handleForm = function(){
       $('form, input').blur(function(){
@@ -46,25 +46,26 @@ var index = function(){
             $('#' + id).val('');// LIMPO A CAIXA DE TEXTO A CADA PASSADA PELO LOOP EACH
           });
         }else if(parseInt(text.length, 10) > 8){
-          // LIMITA O N⁄MERO M¡XIMO DE CARACETRES EM 8 PARA O CEP
+          // LIMITA O N√öMERO M√ÅXIMO DE CARACETRES EM 8 PARA O CEP
           $(this).val(text.substr(0, 8));
         }
       });
-      // EVENTO CLICK DO BOT√O
+      // EVENTO CLICK DO BOT√ÉO
       $('#btn_cep').click(function(){
         var cep = $("#txt_cep").val();// PEGO O VALOR DO CEP
-        // CHAMO O M…TODO DA CLASSE CEP EM: ipage-wscep.js
+        // CHAMO O M√âTODO DA CLASSE CEP EM: ipage-wscep.js
         // PARA VALIDAR O CEP
         if (classCep.validaCep(cep) === false) {
-            alert('N˙mero do CEP inv·lido ou inexistente, verifique!');
+            alert('N√∫mero do CEP inv√°lido ou inexistente, verifique!');
             $("#txt_cep").focus().select();
             return false;
         }
-        // ATIVO A ANIMA«√O DE AGUADE E ESPERO O M…TODO DA CLASSE CEP
-        // TERMINAR A REQUISI«√O AO WEBSERVICE
+        // ATIVO A ANIMA√á√ÉO DE AGUADE E ESPERO O M√âTODO DA CLASSE CEP
+        // TERMINAR A REQUISI√á√ÉO AO WEBSERVICE
         index.wait(true, function(ret){
           if(classCep.getCep(cep, function(result){
-              if(!result){
+              if(result['error']){
+                alert(result['msg'])
                 $('#txt_cep').select().focus();
                 jQuery.each($('.ipage-result-cep'), function(index, item){
                   $(this).removeClass("ipage-result-cep");
@@ -86,7 +87,7 @@ var index = function(){
       });
     }
     return{
-        //FunÁ„o principal inicializada na carga da p·gina
+        //Fun√ß√£o principal inicializada na carga da p√°gina
         init: function (par){
           handleForm();
           handleCep();
