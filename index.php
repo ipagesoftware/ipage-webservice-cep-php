@@ -1,3 +1,21 @@
+<?php
+  $dados = array();
+  //
+  if($_POST){
+    if(isset($_POST['txt_cep'])){
+      if(!empty($_POST['txt_cep'])){
+        $url = "https://www.ipage.com.br/ws/v1/cep/";
+        $url .= $_POST['txt_cep'] . "/json/";
+        $url .= "Solicite a chave de acesso ao Web Service.";
+        //
+        $response = file_get_contents($url);
+        $dados = (array)json_decode($response);
+      }else{
+        $dados = array('error'=>true, 'msg'=>'Ipage Webservice: Invalid CEP. Please contact technical support through our web site: www.ipage.com.br');
+      }
+    }
+  }
+?>
 <!doctype html>
 <html>
   <base href=""/>
@@ -13,7 +31,7 @@
     <meta name="replyTo" content="atendimento@ipagesoftware.com.br">
     <!-- FIM DEFINICAO META TAG //-->
 		<title>
-			Ipage WebService CEP &reg; PHP + Jquery
+			Ipage WebService CEP &reg; PHP
 		</title>
     <style>
         ._fancybar{margin-top:50p !important;z-index: 5}
@@ -74,7 +92,7 @@
 						</span>
 					</button>
 					<div class="animbrand">
-						<a class="navbar-brand animate" href="https://www.ipagesoftware.com.br/license_key/www/examples/">Ipage WebService CEP &reg; PHP + Jquery</a>
+						<a class="navbar-brand animate" href="https://www.ipagesoftware.com.br/license_key/www/examples/">Ipage WebService CEP &reg; PHP</a>
 					</div>
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -95,7 +113,22 @@
 		</nav>
     <!-- //-->
 		<div class="container" style="margin-top: auto; padding-top: 20px;">
-  		<form class="form-horizontal" action="javascript:;">
+<?php
+    if(isset($dados['error'])){
+      if($dados['error']){
+        $msg  = '<div class="alert alert-danger">';
+        $msg .= '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">';
+        $msg .= '</button>';
+        $msg .= $dados['msg'];
+        $msg .= '</div>';
+        echo($msg);
+        $dados['cep'] = $_POST['txt_cep'];
+      }
+    }
+
+
+?>
+  		<form class="form-horizontal" action="<?php echo($_SERVER["PHP_SELF"]); ?>" method="post">
   			<fieldset>
   				<!-- Form Name -->
   				<legend>Formulário</legend>
@@ -104,144 +137,150 @@
   					<label class="col-md-2 control-label" for="appendedtext">CEP:</label>
   					<div class="col-md-3">
   						<div class="input-group">
-  							<input id="txt_cep" name="txt_cep" class="form-control" type="number" value=""/>
-  							<span class="input-group-addon" id="btn_cep" style="cursor: pointer;color:#fff;background-color:#5cb85c;border-color:#4cae4c">Pesquisar</span>
+               <input id="txt_cep" name="txt_cep" class="form-control" type="text" value="<?php echo(isset($dados['cep'])? $dados['cep']:null) ?>" maxlength="9" data-type="mask" data-inputmask="cep" data-inputmask-inputformat="#####-###" data-inputmask-defaultvalue="" />
+                <!-- Button -->
+                <div class="input-group-addon" style="padding: 0; border: none;">
+                    <button type="submit" class="btn"><i class="icon-search"></i> Pesquisar</button>
+                </div>
   						</div>
   					</div>
   				</div>
+          <hr />
   				<!--// TIPO LOGRADOURO //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">Tipo Logradouro</label>
   					<div class="col-md-2">
-  						<input id="tp_logradouro" name="tp_logradouro" type="text" class="form-control input-md"/>
+  						<input id="tp_logradouro" type="text" class="form-control input-md" value="<?php echo(isset($dados['tp_logradouro'])? $dados['tp_logradouro']:null) ?>"/>
   					</div>
   				</div>
   				<!--// LOGRADOURO //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">Logradouro:</label>
   					<div class="col-md-8">
-  						<input id="logradouro" name="logradouro" type="text" class="form-control input-md"/>
+  						<input id="logradouro" type="text" class="form-control input-md" value="<?php echo(isset($dados['logradouro'])? $dados['logradouro']:null) ?>"/>
   					</div>
   				</div>
   				<!--// LOGRADOURO2 //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">Logradouro Completo:</label>
   					<div class="col-md-8">
-  						<input id="logradouro2" name="logradouro2" type="text" class="form-control input-md"/>
+  						<input id="logradouro2" type="text" class="form-control input-md" value="<?php echo(isset($dados['logradouro2'])? $dados['logradouro2']:null) ?>"/>
   					</div>
   				</div>
   				<!--// COMPLEMENTO //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">Complemento:</label>
   					<div class="col-md-8">
-  						<input id="complemento" name="complemento" type="text" class="form-control input-md"/>
+  						<input id="complemento" type="text" class="form-control input-md" value="<?php echo(isset($dados['complemento'])? $dados['complemento']:null) ?>"/>
   					</div>
   				</div>
   				<!--// IBGE //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">IBGE:</label>
   					<div class="col-md-2">
-  						<input id="ibge" name="ibge" type="text" class="form-control input-md"/>
+  						<input id="ibge" type="text" class="form-control input-md" value="<?php echo(isset($dados['ibge'])? $dados['ibge']:null) ?>"/>
   					</div>
   				</div>
   				<!--// GIA //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">GIA:</label>
   					<div class="col-md-2">
-  						<input id="gia" name="gia" type="text" class="form-control input-md"/>
+  						<input id="gia" type="text" class="form-control input-md" value="<?php echo(isset($dados['gia'])? $dados['gia']:null) ?>"/>
   					</div>
   				</div>
   				<!--// BAIRRO //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">Bairro:</label>
   					<div class="col-md-4">
-  						<input id="bairro" name="bairro" type="text" class="form-control input-md"/>
+  						<input id="bairro" type="text" class="form-control input-md" value="<?php echo(isset($dados['bairro'])? $dados['bairro']:null) ?>"/>
   					</div>
   				</div>
   				<!--// CIDADE //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">Cidade:</label>
   					<div class="col-md-6">
-  						<input id="cidade" name="cidade" type="text" class="form-control input-md"/>
+  						<input id="cidade" type="text" class="form-control input-md" value="<?php echo(isset($dados['cidade'])? $dados['cidade']:null) ?>"/>
   					</div>
   				</div>
   				<!--// UF //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">UF:</label>
   					<div class="col-md-2">
-  						<input id="uf" name="uf" type="text" class="form-control input-md"/>
+  						<input id="uf" type="text" class="form-control input-md" value="<?php echo(isset($dados['uf'])? $dados['uf']:null) ?>"/>
   					</div>
   				</div>
   				<!--// DDD //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">DDD:</label>
   					<div class="col-md-2">
-  						<input id="ddd" name="ddd" type="text" class="form-control input-md"/>
+  						<input id="ddd" type="text" class="form-control input-md" value="<?php echo(isset($dados['ddd'])? $dados['ddd']:null) ?>"/>
   					</div>
   				</div>
   				<!--// DISTÂNCIA DA CAPITAL //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">DDD:</label>
   					<div class="col-md-2">
-  						<input id="distancia_da_capital" name="distancia_da_capital" type="text" class="form-control input-md"/>
+  						<input id="distancia_da_capital" type="text" class="form-control input-md" value="<?php echo(isset($dados['distancia_da_capital'])? $dados['distancia_da_capital']:null) ?>"/>
   					</div>
   				</div>
   				<!--// FAIXA DE CEP //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">Faixa de CEP:</label>
   					<div class="col-md-3">
-  						<input id="faixa_de_cep" name="faixa_de_cep" type="text" class="form-control input-md"/>
+  						<input id="faixa_de_cep" type="text" class="form-control input-md" value="<?php echo(isset($dados['faixa_de_cep'])? $dados['faixa_de_cep']:null) ?>"/>
   					</div>
   				</div>
   				<!--// FAIXA DE CEP //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">Gentilico:</label>
   					<div class="col-md-4">
-  						<input id="gentilico" name="gentilico" type="text" class="form-control input-md"/>
+  						<input id="gentilico" type="text" class="form-control input-md" value="<?php echo(isset($dados['gentilico'])? $dados['gentilico']:null) ?>"/>
   					</div>
   				</div>
   				<!--// DISTÂNCIA DA CAPITAL //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">Latitude:</label>
   					<div class="col-md-2">
-  						<input id="latitude" name="latitude" type="text" class="form-control input-md"/>
+  						<input id="latitude" type="text" class="form-control input-md" value="<?php echo(isset($dados['latitude'])? $dados['latitude']:null) ?>"/>
   					</div>
   				</div>
   				<!--// DISTÂNCIA DA CAPITAL //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">Longitude:</label>
   					<div class="col-md-2">
-  						<input id="longitude" name="longitude" type="text" class="form-control input-md"/>
+  						<input id="longitude" type="text" class="form-control input-md" value="<?php echo(isset($dados['longitude'])? $dados['longitude']:null) ?>"/>
   					</div>
   				</div>
   				<!--// REGIÃO //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">Região:</label>
   					<div class="col-md-4">
-  						<input id="regiao" name="regiao" type="text" class="form-control input-md"/>
+  						<input id="regiao" type="text" class="form-control input-md" value="<?php echo(isset($dados['regiao'])? $dados['regiao']:null) ?>"/>
   					</div>
   				</div>
   				<!--// MESOR REGIÃO //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">Mesor Região:</label>
   					<div class="col-md-4">
-  						<input id="mesorregiao" name="mesorregiao" type="text" class="form-control input-md"/>
+  						<input id="mesorregiao" type="text" class="form-control input-md" value="<?php echo(isset($dados['mesorregiao'])? $dados['mesorregiao']:null) ?>"/>
   					</div>
   				</div>
   				<!--// MICROR REGIÃO //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">Micror Região:</label>
   					<div class="col-md-4">
-  						<input id="microrregiao" name="microrregiao" type="text" class="form-control input-md"/>
+  						<input id="microrregiao" type="text" class="form-control input-md" value="<?php echo(isset($dados['microrregiao'])? $dados['microrregiao']:null) ?>"/>
   					</div>
   				</div>
   				<!--// MICROR REGIÃO //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">Tempo Percurso Veículo:</label>
   					<div class="col-md-4">
-  						<input id="tempo_percurso_veiculo" name="tempo_percurso_veiculo" type="text" class="form-control input-md"/>
+  						<input id="tempo_percurso_veiculo" type="text" class="form-control input-md" value="<?php echo(isset($dados['tempo_percurso_veiculo'])? $dados['tempo_percurso_veiculo']:null) ?>"/>
   					</div>
   				</div>
+          <!-- //-->
+
   			</fieldset>
   		</form>
     </div>
@@ -270,6 +309,7 @@
 		<script src="assets/js/scripts.min.js"></script>
     <!-- start: PACOTE JAVASCRIPT IPAGE WEBSERVICE CEP //-->
     <script src="ipage/js/ipage-wscep.js"></script>
+    <script type="text/javascript" src="ipage/js/jquery-mask/jquery.mask.min.js"></script>
     <script src="ipage/js/index.js"></script>
     <!-- end: PACOTE JAVASCRIPT IPAGE WEBSERVICE CEP //-->
 	</body>

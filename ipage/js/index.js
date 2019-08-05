@@ -16,81 +16,86 @@ $(document).ready(function(){
 });
 // CLASS INDEX
 var index = function(){
-    /**
-     * index::handleForm()
-     * MÉTODO RESPONSÁVEL PELO TRATAMENTO DO CEP
-     */
     var handleForm = function(){
-      $('form, input').blur(function(){
-        // REMOVE A CLASSE QUE MUDA A COR DA CAIXA DE TEXTO
-        if($(this).hasClass("ipage-result-cep")){
-          $(this).removeClass("ipage-result-cep");
-        }
-      });
+      //
+      setTimeout(function(){
+        $(".alert").fadeOut();
+      }, 5000);
+
     }
-    /**
-     * index::handleCep()
-     *
-     */
-    var handleCep = function () {
-      var classCep = new IpageCep(), form = $("form input[type=text]"), id, text;
-      // CEP
-      $('#txt_cep').keyup(function(code){
-        text = $(this).val();
+
+    var handleInputMasks = function () {
         //
-        if(parseInt(text.length, 10) < 8){
-          // LIMPA O VALOR DE TODAS AS CAIXAS DE TEXTO ABAIXO DO CEP
-          // SE O VALOR FOR MENOR QUE 8
-          jQuery.each(form, function(index, item){
-            id = $(item).attr("id");// PEGO O ID DE CADA CAIXA DE TEXTO
-            $('#' + id).val('');// LIMPO A CAIXA DE TEXTO A CADA PASSADA PELO LOOP EACH
-          });
-        }else if(parseInt(text.length, 10) > 8){
-          // LIMITA O NÚMERO MÁXIMO DE CARACETRES EM 8 PARA O CEP
-          $(this).val(text.substr(0, 8));
-        }
-      });
-      // EVENTO CLICK DO BOTÃO
-      $('#btn_cep').click(function(){
-        var cep = $("#txt_cep").val();// PEGO O VALOR DO CEP
-        // CHAMO O MÉTODO DA CLASSE CEP EM: ipage-wscep.js
-        // PARA VALIDAR O CEP
-        if (classCep.validaCep(cep) === false) {
-            alert('Número do CEP inválido ou inexistente, verifique!');
-            $("#txt_cep").focus().select();
-            return false;
-        }
-        // ATIVO A ANIMAÇÃO DE AGUADE E ESPERO O MÉTODO DA CLASSE CEP
-        // TERMINAR A REQUISIÇÃO AO WEBSERVICE
-        index.wait(true, function(ret){
-          if(classCep.getCep(cep, function(result){
-              if(result['error']){
-                alert(result['msg'])
-                $('#txt_cep').select().focus();
-                jQuery.each($('.ipage-result-cep'), function(index, item){
-                  $(this).removeClass("ipage-result-cep");
-                });
-              }else{
-                jQuery.each(result, function(index, item){
-                  if(typeof($('#' + index).val)!=='undefined'){
-                    $('#' + index).val(item.toUpperCase()).addClass("ipage-result-cep");
-                  }
+        //// INICIO A VARREDURA PELOS OBJETOS INPUT
+        //////
+        $('input').each(function(index, value){
+          var id = $(this).attr('id');
+          //
+          if($(this).data('type')=='mask'){
+            if(typeof(id)!='undefined'){
+              var el = document.getElementById($(this).attr('id'));
+              //// ARMAZENA A REPRESENTAÇÃO DE TODAS AS PROPRIEDADES DATA
+              // DO OBJETO INPUT
+              var data = getDataAttributes(el);
+              //
+              if(typeof(data['inputmaskInputformat'])!=='undefined'){
+                // CAMPO MOEDA
+                if(data['inputmask']=='currency'){
+                  $(this).mask(data['inputmaskInputformat'], {
+                      reverse: true,
+                      maxlength: false
+                  });
+                }else{
+                  $(this).mask(data['inputmaskInputformat']);
+                }
+                //                //
+                $(this).blur(function(){
+                    if(typeof(data['inputmaskInputformat'])!=='undefined'){
+                      if($(this).val().trim()==''){
+                        $(this).val(data['inputmaskDefaultvalue']);
+                      }else{
+                        if(data['inputmask']=='currency'){
+                          var ret = replaceAll($(this).val().trim(), ',', '');
+                          $(this).val(ret);
+                        }
+                      }
+                    }
                 });
               }
-            })
-          );
+            }
+          }
         });
-      })
-      //
-      $('.ipage-resultado-cep').blur(function(){
-        $(this).removeClass("ipage-result-cep");
-      });
+        function replaceAll(string, token, newtoken) {
+            try{
+              while (string.indexOf(token) !== -1) {
+                  string = string.replace(token, newtoken)
+              }
+            }catch(e){
+              console.log(e);
+            }
+            return string
+        }
+        // THE MAGIC FUNCTION CREATED BY DIÓGENES DIAS
+        function getDataAttributes(el) {
+            var data = {};
+            [].forEach.call(el.attributes, function(attr) {
+                if (/^data-/.test(attr.name)) {
+                    var camelCaseName = attr.name.substr(5).replace(/-(.)/g, function ($0, $1) {
+                        return $1.toUpperCase();
+                    });
+                    data[camelCaseName] = attr.value;
+                }
+            });
+            return data;
+        }
+        //
     }
+
     return{
         //Função principal inicializada na carga da página
         init: function (par){
           handleForm();
-          handleCep();
+          handleInputMasks();
         },
         wait: function(value, callback) {
         if (value){
