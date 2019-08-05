@@ -47,7 +47,7 @@
     <!-- OPEN GRAPH //-->
     <meta property="locale" content="pr_BR">
     <meta property="url" content="https://www.ipage.com.br">
-    <meta property="title" content="LavoroX - sua aplicaÁ„o em nuvem.">
+    <meta property="title" content="LavoroX - sua aplica√ß√£o em nuvem.">
     <meta property="description" content="Empresa lider em desenvolvimento de software. Oferece as melhores solucoes em produtos e servicos para o mercado">
     <meta property="type" content="website">
     <meta property="og:image:" content="https://www.ipage.com.br/newipage/personal/images/recibo.jpg">
@@ -131,7 +131,7 @@
   		<form class="form-horizontal" action="<?php echo($_SERVER["PHP_SELF"]); ?>" method="post">
   			<fieldset>
   				<!-- Form Name -->
-  				<legend>Formul·rio</legend>
+  				<legend>Formul√°rio</legend>
   				<!--// //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="appendedtext">CEP:</label>
@@ -216,7 +216,7 @@
   						<input id="ddd" type="text" class="form-control input-md" value="<?php echo(isset($dados['ddd'])? $dados['ddd']:null) ?>"/>
   					</div>
   				</div>
-  				<!--// DIST¬NCIA DA CAPITAL //-->
+  				<!--// DIST√ÇNCIA DA CAPITAL //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">DDD:</label>
   					<div class="col-md-2">
@@ -237,44 +237,44 @@
   						<input id="gentilico" type="text" class="form-control input-md" value="<?php echo(isset($dados['gentilico'])? $dados['gentilico']:null) ?>"/>
   					</div>
   				</div>
-  				<!--// DIST¬NCIA DA CAPITAL //-->
+  				<!--// DIST√ÇNCIA DA CAPITAL //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">Latitude:</label>
   					<div class="col-md-2">
   						<input id="latitude" type="text" class="form-control input-md" value="<?php echo(isset($dados['latitude'])? $dados['latitude']:null) ?>"/>
   					</div>
   				</div>
-  				<!--// DIST¬NCIA DA CAPITAL //-->
+  				<!--// DIST√ÇNCIA DA CAPITAL //-->
   				<div class="form-group">
   					<label class="col-md-2 control-label" for="textinput">Longitude:</label>
   					<div class="col-md-2">
   						<input id="longitude" type="text" class="form-control input-md" value="<?php echo(isset($dados['longitude'])? $dados['longitude']:null) ?>"/>
   					</div>
   				</div>
-  				<!--// REGI√O //-->
+  				<!--// REGI√ÉO //-->
   				<div class="form-group">
-  					<label class="col-md-2 control-label" for="textinput">Regi„o:</label>
+  					<label class="col-md-2 control-label" for="textinput">Regi√£o:</label>
   					<div class="col-md-4">
   						<input id="regiao" type="text" class="form-control input-md" value="<?php echo(isset($dados['regiao'])? $dados['regiao']:null) ?>"/>
   					</div>
   				</div>
-  				<!--// MESOR REGI√O //-->
+  				<!--// MESOR REGI√ÉO //-->
   				<div class="form-group">
-  					<label class="col-md-2 control-label" for="textinput">Mesor Regi„o:</label>
+  					<label class="col-md-2 control-label" for="textinput">Mesor Regi√£o:</label>
   					<div class="col-md-4">
   						<input id="mesorregiao" type="text" class="form-control input-md" value="<?php echo(isset($dados['mesorregiao'])? $dados['mesorregiao']:null) ?>"/>
   					</div>
   				</div>
-  				<!--// MICROR REGI√O //-->
+  				<!--// MICROR REGI√ÉO //-->
   				<div class="form-group">
-  					<label class="col-md-2 control-label" for="textinput">Micror Regi„o:</label>
+  					<label class="col-md-2 control-label" for="textinput">Micror Regi√£o:</label>
   					<div class="col-md-4">
   						<input id="microrregiao" type="text" class="form-control input-md" value="<?php echo(isset($dados['microrregiao'])? $dados['microrregiao']:null) ?>"/>
   					</div>
   				</div>
-  				<!--// MICROR REGI√O //-->
+  				<!--// MICROR REGI√ÉO //-->
   				<div class="form-group">
-  					<label class="col-md-2 control-label" for="textinput">Tempo Percurso VeÌculo:</label>
+  					<label class="col-md-2 control-label" for="textinput">Tempo Percurso Ve√≠culo:</label>
   					<div class="col-md-4">
   						<input id="tempo_percurso_veiculo" type="text" class="form-control input-md" value="<?php echo(isset($dados['tempo_percurso_veiculo'])? $dados['tempo_percurso_veiculo']:null) ?>"/>
   					</div>
@@ -293,13 +293,13 @@
 							<a id="js-twitter-follow" href="https://twitter.com/ipage_software" class="twitter-follow-button" data-show-count="false">Seguir @ipage_software</a>
 						</li>
 						<li class="tweet-btn">
-							<a id="js-twitter-tweet" href="https://twitter.com/share" class="twitter-share-button" data-url="https://twitter.com/ipage_software" data-text="AgÍncia de Desenvolvimento Web #LavoroX framework HTML/CSS/JS"
+							<a id="js-twitter-tweet" href="https://twitter.com/share" class="twitter-share-button" data-url="https://twitter.com/ipage_software" data-text="Ag√™ncia de Desenvolvimento Web #LavoroX framework HTML/CSS/JS"
 							data-via="lavoroX" data-related="LavoroX">Tweet</a>
 						</li>
 					</ul>
 				</div>
 				<p>
-					Copyright DiÛgenes Dias &copy; <?php echo date("Y"); ?>
+					Copyright Di√≥genes Dias &copy; <?php echo date("Y"); ?>
 					<a href="http://www.ipage.com.br" target="_blank">Ipage Software</a>
 				</p>
 			</div>
@@ -307,8 +307,6 @@
 		<script src="assets/js/jquery-1.11.0.min.js"></script>
 		<script src="assets/js/bootstrap.min.js"></script>
 		<script src="assets/js/scripts.min.js"></script>
-    <!-- start: PACOTE JAVASCRIPT IPAGE WEBSERVICE CEP //-->
-    <script src="ipage/js/ipage-wscep.js"></script>
     <script type="text/javascript" src="ipage/js/jquery-mask/jquery.mask.min.js"></script>
     <script src="ipage/js/index.js"></script>
     <!-- end: PACOTE JAVASCRIPT IPAGE WEBSERVICE CEP //-->
